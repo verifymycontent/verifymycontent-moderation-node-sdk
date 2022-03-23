@@ -1,9 +1,8 @@
-import { ModerationClient } from 'client'
-import { HmacSHA256 } from 'crypto-js'
+import { ModerationClient } from '../client'
+import { hmac } from './_hmac'
 
-export const signature = (client: ModerationClient) => (body: any): string => {
-  return HmacSHA256(
-    JSON.stringify(body),
-    client.getOptions().apiSecret
-  ).toString()
-}
+export const signature =
+  (client: ModerationClient) =>
+  (body: string): string => {
+    return `hmac ${client.getOptions().apiKey}:${hmac(client)(body)}`
+  }

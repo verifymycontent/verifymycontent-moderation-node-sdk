@@ -1,4 +1,5 @@
-import { DEFAULT_MODERATION_URL } from 'utils'
+import { GetModerationAction } from '../actions'
+import { DEFAULT_MODERATION_URL } from '../utils'
 
 export type ModerationClientOptions = {
   url?: string
@@ -17,6 +18,8 @@ class defaultModerationClient implements ModerationClient {
   }
 
   getOptions = () => this.options
+
+  getModeration = GetModerationAction(this)
 }
 
 export const NewModerationClient = (options: ModerationClientOptions) => {

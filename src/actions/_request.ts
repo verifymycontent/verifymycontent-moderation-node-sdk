@@ -1,27 +1,44 @@
-import { ModerationClient } from 'client'
+import axios, { AxiosInstance, AxiosResponse } from 'axios'
+import { ModerationClient } from '../client'
 import { signature } from './_signature'
 
 type RequestOptions = {
-  url: string
-  method: string
-  withSignature?: boolean
+  uri: string
+  method: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH'
+  signed?: boolean
   body?: any
 }
 
+let _moderationHttp: AxiosInstance
+const ModerationHttp = (client: ModerationClient): AxiosInstance => {
+  if (!_moderationHttp) {
+    _moderationHttp = axios.create({
+      baseURL: client.getOptions().url,
+    })
+  }
+
+  return _moderationHttp
+}
+
 export const request =
-  (client: ModerationClient) => (options: RequestOptions) => {
-    return fetch(`${client.getOptions().url}${options.url}`, {
-      method: options.method,
+  (client: ModerationClient) =>
+  (options: RequestOptions): Promise<AxiosResponse> => {
+    const { uri, method, signed, body } = options
+    const sign = signed && signature(client)
+
+    return ModerationHttp(client).request({
+      url: uri,
+      method: method,
       headers: {
         'Content-Type': 'application/json',
-        ...(options.withSignature
+        ...(signed
           ? {
-              Authorization: `hmac ${client.getOptions().apiKey}:${signature(
-                options.body
-              )}`,
+              Authorization: sign(
+                method === 'GET' ? uri : JSON.stringify(body)
+              ),
             }
           : {}),
       },
-      body: options.body,
+      data: body ? JSON.stringify(body) : undefined,
     })
   }
