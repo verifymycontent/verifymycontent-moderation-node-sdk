@@ -1,5 +1,5 @@
 {
-  "name": "verifymycontent-video-moderation-typescript",
+  "name": "verifymycontent-video-moderation",
   "version": "1.0.1",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -17,7 +17,9 @@
   },
   "scripts": {
     "build": "tsc --declaration",
-    "watch": "tsc --watch --declaration"
+    "watch": "tsc --watch --declaration",
+    "prepublish": "yarn build",
+    "preversion": "yarn build"
   },
   "files": [
     "dist"
