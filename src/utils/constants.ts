@@ -1,0 +1,1 @@
+export const DEFAULT_MODERATION_URL = 'https://moderation.verifymyage.com';
