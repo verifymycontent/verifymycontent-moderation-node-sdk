@@ -1,17 +1,18 @@
 import { ModerationClientOptions } from '../client'
-import { ModerationModel } from '../models'
+import { CreateModerationRequest, ModerationModel } from '../models'
 import { request } from './_request'
 
-export const GetModerationAction =
+export const CreateModerationAction =
   (options: ModerationClientOptions) =>
-  async (id: ModerationModel['id']): Promise<ModerationModel> => {
+  async (body: CreateModerationRequest): Promise<ModerationModel> => {
     const response = await request(options)({
-      method: 'GET',
-      uri: `/api/v1/moderation/${id}`,
+      method: 'POST',
+      uri: `/api/v1/moderation`,
       signed: true,
+      body: body,
     })
 
-    if (response.status !== 200) {
+    if (response.status !== 201) {
       throw new Error(`Unexpected status code: ${response.status}`)
     }
 

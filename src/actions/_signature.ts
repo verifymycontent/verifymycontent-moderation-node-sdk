@@ -1,8 +1,9 @@
-import { ModerationClient } from '../client'
+import { ModerationClientOptions } from '../client'
 import { hmac } from './_hmac'
 
 export const signature =
-  (client: ModerationClient) =>
+  (options: ModerationClientOptions) =>
   (body: string): string => {
-    return `hmac ${client.getOptions().apiKey}:${hmac(client)(body)}`
+    console.log(`doing hmac with ${options.apiSecret} and ${body}`)
+    return `hmac ${options.apiKey}:${hmac(options)(body)}`
   }

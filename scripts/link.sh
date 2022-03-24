@@ -1,4 +1,4 @@
-PACKAGE_NAME="verifymycontent-video-moderation-typescript"
+PACKAGE_NAME="verifymycontent-video-moderation"
 CURRENT_DIR=`pwd`
 TARGET_DIR=``
 
@@ -15,4 +15,4 @@ echo "LINKING LOCAL PACKAGE"
 cd $CURRENT_DIR && \
 yarn link &&
 cd $TARGET_DIR && \
-yarn link verifymycontent-video-moderation-typescript
+yarn link $PACKAGE_NAME

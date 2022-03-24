@@ -1,8 +1,10 @@
 import { HmacSHA256 } from 'crypto-js'
-import { ModerationClient } from '../client'
+import { ModerationClientOptions } from '../client'
 
 export const hmac =
-  (client: ModerationClient) =>
+  (options: ModerationClientOptions) =>
   (body: string): string => {
-    return HmacSHA256(body, client.getOptions().apiSecret).toString()
+    return HmacSHA256(body, options.apiSecret).toString()
   }
+
+export { AES } from 'crypto-js'

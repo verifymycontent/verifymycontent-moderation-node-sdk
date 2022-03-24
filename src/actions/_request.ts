@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios'
-import { ModerationClient } from '../client'
+import { ModerationClient, ModerationClientOptions } from '../client'
 import { signature } from './_signature'
 
 type RequestOptions = {
@@ -10,10 +10,10 @@ type RequestOptions = {
 }
 
 let _moderationHttp: AxiosInstance
-const ModerationHttp = (client: ModerationClient): AxiosInstance => {
+const ModerationHttp = (options: ModerationClientOptions): AxiosInstance => {
   if (!_moderationHttp) {
     _moderationHttp = axios.create({
-      baseURL: client.getOptions().url,
+      baseURL: options.url,
     })
   }
 
@@ -21,24 +21,23 @@ const ModerationHttp = (client: ModerationClient): AxiosInstance => {
 }
 
 export const request =
-  (client: ModerationClient) =>
-  (options: RequestOptions): Promise<AxiosResponse> => {
-    const { uri, method, signed, body } = options
-    const sign = signed && signature(client)
+  (options: ModerationClientOptions) =>
+  (request: RequestOptions): Promise<AxiosResponse> => {
+    const { uri, method, signed, body } = request
+    const sign = signed && signature(options)
+    const content = body ? JSON.stringify(body) : undefined
 
-    return ModerationHttp(client).request({
+    return ModerationHttp(options).request({
       url: uri,
       method: method,
       headers: {
         'Content-Type': 'application/json',
         ...(signed
           ? {
-              Authorization: sign(
-                method === 'GET' ? uri : JSON.stringify(body)
-              ),
+              Authorization: sign(method === 'GET' ? uri : content),
             }
           : {}),
       },
-      data: body ? JSON.stringify(body) : undefined,
+      data: content,
     })
   }
