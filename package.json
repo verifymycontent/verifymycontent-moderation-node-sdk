@@ -1,5 +1,5 @@
 {
-  "name": "verifymycontent-video-moderation",
+  "name": "verifymycontent-moderation",
   "version": "1.1.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

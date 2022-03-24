@@ -3,15 +3,15 @@
 ## Installation
 
 ```bash
-$ npm install verifymycontent-moderation-node-sdk --save
+$ npm install verifymycontent-moderation --save
 // or
-$ yarn add verifymycontent-moderation-node-sdk
+$ yarn add verifymycontent-moderation
 ```
 
 ## Usage
 
 ```typescript
-import { ModerationClient } from 'verifymycontent-video-moderation'
+import { ModerationClient } from 'verifymycontent-moderation'
 ;(async function () {
   const Client = new ModerationClient({
     apiKey: 'YOUR_API_KEY',
