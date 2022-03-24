@@ -16,7 +16,7 @@ import { ModerationClient } from 'verifymycontent-moderation'
   const Client = new ModerationClient({
     apiKey: 'YOUR_API_KEY',
     apiSecret: 'YOUR_API_SECRET',
-    // url: "https://nucleus-moderation-sdx.verifymyage.com" // Sandbox
+    // useSandbox: true,
   })
 
   const moderation = await Client.createModeration({
