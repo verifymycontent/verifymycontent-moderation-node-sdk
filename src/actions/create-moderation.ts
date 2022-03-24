@@ -4,12 +4,21 @@ import { request } from './_request'
 
 export const CreateModerationAction =
   (options: ModerationClientOptions) =>
-  async (body: CreateModerationRequest): Promise<ModerationModel> => {
+  async ({
+    content: { id: content_id, ...content },
+    ...body
+  }: CreateModerationRequest): Promise<ModerationModel> => {
     const response = await request(options)({
       method: 'POST',
       uri: `/api/v1/moderation`,
       signed: true,
-      body: body,
+      body: {
+        ...body,
+        content: {
+          ...content,
+          external_id: content_id,
+        },
+      },
     })
 
     if (response.status !== 201) {

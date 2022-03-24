@@ -8,12 +8,12 @@ export type ModerationClientOptions = {
   apiSecret: string
 }
 
-export interface ModerationClient {
+export interface IModerationClient {
   getModeration(id: ModerationModel['id']): Promise<ModerationModel>
   createModeration(request: CreateModerationRequest): Promise<ModerationModel>
 }
 
-class defaultModerationClient implements ModerationClient {
+class defaultModerationClient implements IModerationClient {
   constructor(private readonly options: ModerationClientOptions) {
     this.options = {
       url: DEFAULT_MODERATION_URL,
@@ -25,6 +25,4 @@ class defaultModerationClient implements ModerationClient {
   createModeration = CreateModerationAction(this.options)
 }
 
-export const NewModerationClient = (options: ModerationClientOptions) => {
-  return new defaultModerationClient(options)
-}
+export const ModerationClient = defaultModerationClient

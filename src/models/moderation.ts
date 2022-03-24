@@ -13,7 +13,7 @@ export type ModerationModel = {
 }
 
 export type CreateModerationRequest = {
-  content: Content
+  content: Omit<Content, 'external_id'> & { id: Content['external_id'] }
   customer: Customer
   webhook: string
 }
