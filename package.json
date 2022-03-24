@@ -3,7 +3,7 @@
   "version": "1.1.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "repository": "git@github.com:jorgejr568/verifymycontent-video-moderation-typescript.git",
+  "repository": "git@github.com:jorgejr568/verifymycontent-moderation-node-sdk.git",
   "author": "Jorge Junior <jorge.junior.568@live.com>",
   "license": "MIT",
   "devDependencies": {
