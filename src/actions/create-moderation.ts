@@ -1,5 +1,6 @@
 import { ModerationClientOptions } from '../client'
 import { CreateModerationRequest, ModerationModel } from '../models'
+import { normalizeModeration } from '../normalizers'
 import { request } from './_request'
 
 export const CreateModerationAction =
@@ -25,5 +26,5 @@ export const CreateModerationAction =
       throw new Error(`Unexpected status code: ${response.status}`)
     }
 
-    return response.data
+    return normalizeModeration(response.data)
   }

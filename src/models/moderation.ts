@@ -1,11 +1,20 @@
 import { Content } from './content'
 import { Customer } from './customer'
 
+export type ModerationStatus =
+  | 'pending'
+  | 'awaiting-people'
+  | 'awaiting-automation'
+  | 'awaiting-moderation'
+  | 'approved'
+  | 'failed'
+  | 'rejected'
+
 export type ModerationModel = {
   id: string
   redirect_url: string
   external_id: string
-  status: string
+  status: ModerationStatus
   notes: string
   tags: string[]
   created_at: string
