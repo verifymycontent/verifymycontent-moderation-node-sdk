@@ -1,5 +1,6 @@
 import {
   CreateLivestreamAction,
+  CreateAnonymousLivestreamAction,
   CreateModerationAction,
   GetLivestreamAction,
   GetModerationAction,
@@ -18,6 +19,7 @@ export interface IModerationClient {
   getModeration(id: ModerationModel['id']): Promise<ModerationModel>
   createModeration(request: CreateModerationRequest): Promise<ModerationModel>
   createLivestream(request: CreateLivestreamRequest): Promise<LivestreamModel>
+  createAnonymousLivestream(request: CreateLivestreamRequest): Promise<LivestreamModel>
   getLivestream(id: LivestreamModel['id']): Promise<LivestreamModel>
   startLivestream(id: LivestreamModel['id']): Promise<void>
 }
@@ -33,6 +35,7 @@ class defaultModerationClient implements IModerationClient {
   getModeration = GetModerationAction(this.options)
   createModeration = CreateModerationAction(this.options)
   createLivestream = CreateLivestreamAction(this.options)
+  createAnonymousLivestream = CreateAnonymousLivestreamAction(this.options)
   getLivestream = GetLivestreamAction(this.options)
   startLivestream = StartLivestreamAction(this.options)
 }

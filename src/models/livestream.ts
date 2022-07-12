@@ -10,8 +10,10 @@ export type LivestreamStatus =
   | 'started'
   | 'failed'
   | 'stop-requested'
+  | 'stopped-with-flag'
   | 'finished'
   | 'halted'
+  | 'halted-delayed'
 
 export type LivestreamModel = {
   id: string
