@@ -1,12 +1,22 @@
+import { Complaint } from './../models/complaint'
 import {
   CreateLivestreamAction,
   CreateAnonymousLivestreamAction,
   CreateModerationAction,
   GetLivestreamAction,
   GetModerationAction,
-  StartLivestreamAction
+  StartLivestreamAction,
+  CreateComplaintAction,
+  GetComplaintAction,
 } from '../actions'
-import {CreateLivestreamRequest, CreateModerationRequest, LivestreamModel, ModerationModel} from '../models'
+import {
+  CreateComplaintRequest,
+  CreateComplaintResponse,
+  CreateLivestreamRequest,
+  CreateModerationRequest,
+  LivestreamModel,
+  ModerationModel,
+} from '../models'
 import { DEFAULT_MODERATION_URL } from '../utils'
 
 export type ModerationClientOptions = {
@@ -19,9 +29,15 @@ export interface IModerationClient {
   getModeration(id: ModerationModel['id']): Promise<ModerationModel>
   createModeration(request: CreateModerationRequest): Promise<ModerationModel>
   createLivestream(request: CreateLivestreamRequest): Promise<LivestreamModel>
-  createAnonymousLivestream(request: CreateLivestreamRequest): Promise<LivestreamModel>
+  createAnonymousLivestream(
+    request: CreateLivestreamRequest
+  ): Promise<LivestreamModel>
   getLivestream(id: LivestreamModel['id']): Promise<LivestreamModel>
   startLivestream(id: LivestreamModel['id']): Promise<void>
+  createComplaint(
+    request: CreateComplaintRequest
+  ): Promise<CreateComplaintResponse>
+  getComplaint(id: Complaint['id']): Promise<Complaint>
 }
 
 class defaultModerationClient implements IModerationClient {
@@ -38,6 +54,8 @@ class defaultModerationClient implements IModerationClient {
   createAnonymousLivestream = CreateAnonymousLivestreamAction(this.options)
   getLivestream = GetLivestreamAction(this.options)
   startLivestream = StartLivestreamAction(this.options)
+  createComplaint = CreateComplaintAction(this.options)
+  getComplaint = GetComplaintAction(this.options)
 }
 
 export const ModerationClient = defaultModerationClient
