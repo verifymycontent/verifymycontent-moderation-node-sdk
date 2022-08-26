@@ -1,4 +1,4 @@
-import {LivestreamModel, LivestreamStatus} from '../models'
+import { LivestreamModel, LivestreamStatus } from '../models'
 
 export const normalizeLivestreamStatus = (status: string): LivestreamStatus => {
   return status.toLowerCase().replace(' ', '-') as LivestreamStatus

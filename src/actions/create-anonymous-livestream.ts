@@ -1,7 +1,7 @@
-import {ModerationClientOptions} from "../client";
-import {CreateLivestreamRequest, LivestreamModel} from "../models";
-import {request} from "./_request";
-import {normalizeLivestream} from "../normalizers";
+import { ModerationClientOptions } from '../client'
+import { CreateLivestreamRequest, LivestreamModel } from '../models'
+import { request } from './_request'
+import { normalizeLivestream } from '../normalizers'
 
 export const CreateAnonymousLivestreamAction =
   (options: ModerationClientOptions) =>
