@@ -1,4 +1,3 @@
-import { Complaint } from './../models/complaint'
 import {
   CreateLivestreamAction,
   CreateAnonymousLivestreamAction,
@@ -6,16 +5,21 @@ import {
   GetLivestreamAction,
   GetModerationAction,
   StartLivestreamAction,
-  CreateComplaintAction,
-  GetComplaintAction,
+  CreateComplaintConsentAction,
+  CreateComplaintModerationAction,
+  CreateComplaintLivestreamAction,
 } from '../actions'
 import {
-  CreateComplaintRequest,
-  CreateComplaintResponse,
+  CreateComplaintConsentRequest,
+  CreateComplaintConsentResponse,
   CreateLivestreamRequest,
   CreateModerationRequest,
   LivestreamModel,
   ModerationModel,
+  CreateComplaintModerationRequest,
+  CreateComplaintLivestreamRequest,
+  CreateComplaintModerationResponse,
+  CreateComplaintLivestreamResponse,
 } from '../models'
 import { DEFAULT_MODERATION_URL } from '../utils'
 
@@ -34,10 +38,15 @@ export interface IModerationClient {
   ): Promise<LivestreamModel>
   getLivestream(id: LivestreamModel['id']): Promise<LivestreamModel>
   startLivestream(id: LivestreamModel['id']): Promise<void>
-  createComplaint(
-    request: CreateComplaintRequest
-  ): Promise<CreateComplaintResponse>
-  getComplaint(id: Complaint['id']): Promise<Complaint>
+  createComplaintConsent(
+    request: CreateComplaintConsentRequest
+  ): Promise<CreateComplaintConsentResponse>
+  createComplaintModeration(
+    request: CreateComplaintModerationRequest
+  ): Promise<CreateComplaintModerationResponse>
+  createComplaintLivestream(
+    request: CreateComplaintLivestreamRequest
+  ): Promise<CreateComplaintLivestreamResponse>
 }
 
 class defaultModerationClient implements IModerationClient {
@@ -54,8 +63,9 @@ class defaultModerationClient implements IModerationClient {
   createAnonymousLivestream = CreateAnonymousLivestreamAction(this.options)
   getLivestream = GetLivestreamAction(this.options)
   startLivestream = StartLivestreamAction(this.options)
-  createComplaint = CreateComplaintAction(this.options)
-  getComplaint = GetComplaintAction(this.options)
+  createComplaintConsent = CreateComplaintConsentAction(this.options)
+  createComplaintModeration = CreateComplaintModerationAction(this.options)
+  createComplaintLivestream = CreateComplaintLivestreamAction(this.options)
 }
 
 export const ModerationClient = defaultModerationClient

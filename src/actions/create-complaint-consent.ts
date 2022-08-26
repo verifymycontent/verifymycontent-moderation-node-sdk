@@ -1,11 +1,16 @@
-import { CreateComplaintRequest, CreateComplaintResponse } from './../models'
+import {
+  CreateComplaintConsentRequest,
+  CreateComplaintConsentResponse,
+} from '../models'
 import { ModerationClientOptions } from '../client'
 import { request } from './_request'
-import { normalizeComplaint } from '../normalizers'
+import { normalizeComplaintResponse } from '../normalizers'
 
-export const CreateComplaintAction =
+export const CreateComplaintConsentAction =
   (options: ModerationClientOptions) =>
-  async (data: CreateComplaintRequest): Promise<CreateComplaintResponse> => {
+  async (
+    data: CreateComplaintConsentRequest
+  ): Promise<CreateComplaintConsentResponse> => {
     const response = await request(options)({
       method: 'POST',
       uri: '/api/v2/complaint-consent',
@@ -19,8 +24,7 @@ export const CreateComplaintAction =
       throw new Error(`Unexpected status code: ${response.status}`)
     }
 
-    return {
-      ...normalizeComplaint(response.data),
-      redirect_url: response.data.redirect_url,
-    }
+    return normalizeComplaintResponse<CreateComplaintConsentResponse>(
+      response.data
+    )
   }
