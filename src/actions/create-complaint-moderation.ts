@@ -13,7 +13,7 @@ export const CreateComplaintModerationAction =
   ): Promise<CreateComplaintModerationResponse> => {
     const response = await request(options)({
       method: 'POST',
-      uri: '/api/v2/complaint-moderation',
+      uri: '/api/v1/complaint-moderation',
       signed: true,
       body: {
         ...data,

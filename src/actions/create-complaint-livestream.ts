@@ -13,7 +13,7 @@ export const CreateComplaintLivestreamAction =
   ): Promise<CreateComplaintLivestreamResponse> => {
     const response = await request(options)({
       method: 'POST',
-      uri: '/api/v2/complaint-livestream',
+      uri: '/api/v1/complaint-livestream',
       signed: true,
       body: {
         ...data,

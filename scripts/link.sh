@@ -1,4 +1,4 @@
-PACKAGE_NAME="verifymycontent-video-moderation"
+PACKAGE_NAME="verifymycontent-moderation"
 CURRENT_DIR=`pwd`
 TARGET_DIR=``
 

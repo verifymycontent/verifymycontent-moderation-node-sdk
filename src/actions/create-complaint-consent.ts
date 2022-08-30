@@ -13,7 +13,7 @@ export const CreateComplaintConsentAction =
   ): Promise<CreateComplaintConsentResponse> => {
     const response = await request(options)({
       method: 'POST',
-      uri: '/api/v2/complaint-consent',
+      uri: '/api/v1/complaint-consent',
       signed: true,
       body: {
         ...data,
